@@ -1,0 +1,17 @@
+<div id="admincontent">
+
+<h1>Albums</h1>
+<br />
+<h1><%= link_to 'New Album', new_album_path %></h1>
+<br />
+
+<% @albums.each do |album| %>
+    <h4><%= link_to album.title, album %> | <%= link_to 'Edit', edit_album_path(album) %> | <%= link_to 'Destroy', album, confirm: 'Are you sure?', method: :delete %></h4>
+    <br />
+<% end %>
+
+<p class="contentnav"><a href="/admin">Back to Admin Center</a></p>
+
+
+
+</div>

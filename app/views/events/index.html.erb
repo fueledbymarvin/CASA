@@ -1,0 +1,72 @@
+	<div id="header">
+		<div id="slideshow">
+			<div id="pictures">
+				<img id="pic1" class="pic" src="<%= asset_path 'pic1.jpg' %>" alt="pic1">
+				<img id="pic2" class="pic" src="<%= asset_path 'pic2.jpg' %>" alt="pic2">
+				<img id="pic3" class="pic" src="<%= asset_path 'pic3.jpg' %>" alt="pic3">
+				<img id="pic4" class="pic" src="<%= asset_path 'pic4.jpg' %>" alt="pic4">
+				<img id="pic5" class="pic" src="<%= asset_path 'pic5.jpg' %>" alt="pic5">
+			</div>
+
+			<img id="nextpic" name="nextpic" src="<%= asset_path 'change pic button.png' %>" alt="Next Picture" onMouseOver="nextpic.src='<%= asset_path 'change pic hover.png' %>'" onMouseOut="nextpic.src='<%= asset_path 'change pic button.png' %>'">
+		</div>
+
+		<div id="contact">
+			<div id="contactlinks">
+				<div class="contactbutton">
+					<a href="http://www.facebook.com/groups/2200024806/" target="_blank"><img src="<%= asset_path 'facebook hover.png' %>" alt="Facebook" /></a>
+					<div class="contacthover facebook"><a href="http://www.facebook.com/groups/2200024806/"><img src="<%= asset_path 'facebook button.png' %>" alt="Facebook" /></a></div>
+				</div>
+
+				<div class="contactbutton">
+					<a href="mailto:yale.casa@gmail.com"><img src="<%= asset_path 'gmail hover.png' %>" alt="Gmail" /></a>
+					<div class="contacthover gmail"><a href="mailto:yale.casa@gmail.com"><img src="<%= asset_path 'gmail button.png' %>" alt="Gmail" /></a></div>
+				</div>
+
+				<div class="contactbutton">
+					<a href="http://www.yale.edu" target="blank"><img src="<%= asset_path 'yale hover.png' %>" alt="Yale" /></a>
+					<div class="contacthover yale"><a href="http://www.yale.edu"><img src="<%= asset_path 'yale button.png' %>" alt="Yale" /></a></div>
+				</div>
+			</div>
+		</div>
+
+		<img id="topdivider" src="<%= asset_path 'top divider.png' %>" alt="The Chinese American Students Association of Yale University">
+	</div>
+
+	<div id="content">
+		
+
+		<% @events.each do |event| %>
+	        <div class="post">
+	            <div class="posticon">
+	                <img class="lantern" src="<%= asset_path 'lantern.png' %>" alt="Lantern">
+	                <h3 class="date"><%= event.day.strftime("%b").upcase %><br /><%= event.day.strftime("%d") %></h3>
+	            </div>
+	            
+	            <div class="posttitles">
+	                <h1 class="title"><%= link_to event.title.html_safe, event %></h1>
+	                <p class="subtitle">
+	                    <% if event.hassub %>
+	                        <%= event.subtitle %>
+	                    <% else %>
+	                        <% if event.addend %>
+	                            <%= event.day.strftime("%A, %B %e, %Y. ") + event.starttime.strftime("%l:%M%p").downcase + " - " + event.endtime.strftime("%l:%M%p.").downcase %>
+	                        <% else %>
+	                            <%= event.day.strftime("%A, %B %e, %Y. ") + event.starttime.strftime("%l:%M%p.").downcase %>
+	                        <% end %>
+	                        <%= event.location + "." %>
+	                    <% end %>
+	                </p>
+	            </div>
+
+	            <% if event.photo? %>
+		          <div class="postphoto"><a href="<%= event.photo.url %>"><%= image_tag event.photo.url(:display) %></a></div>
+		        <% end %>
+
+	            <p class="postcontent"><%= event.info.html_safe %></p>
+	            <p class="postbottom">posted under <a href="list?=<%= event.category %>"><%= event.category %></a></p>
+	        </div>
+	    <% end %>
+
+	    <p class="contentnav"><a href="/list">View All Events</a></p>
+	</div>

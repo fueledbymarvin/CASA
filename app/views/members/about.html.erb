@@ -1,0 +1,92 @@
+	<div id="aboutheader">
+		<div class="slidercover"><img class="slider" src="<%= asset_path 'about header.png' %>"></div>
+		<img class="circle" src="<%= asset_path 'about circle.png' %>">
+	</div>
+
+	<div id="aboutcontent">
+		<h1 class="sectitle">What is CASA?</h1>
+		<p class="secinfo">The Chinese American Students' Association (CASA) is one of Yale's largest and most active undergraduate student organizations. Its purpose is to promote awareness of Chinese and Chinese American culture and identity among all members of the Yale community. We welcome students of all backgrounds who share an interest in culture, politics, community service, or social events.</p>
+
+		<h1 class="sectitle">Meet the Board!</h1>
+
+		<% @members.each_with_index do |member, index| %>
+			<% if index == 0 || index == 1 %>
+				<div class="member <%= "president" if member.position == "Co-President" %>">
+					<%= image_tag member.photo.url(:display) %>
+					<span class="caption">
+						<h1><%= member.name %></h1>
+						<p><%= member.position %></p>
+						<p><%= member.collegeshort + " \'" + member.gradyear.strftime("%y") %></p>
+					</span>
+				</div>
+			<% end %>
+		<% end %>
+		<% @members.each_with_index do |member, index| %>
+			<% if index == 0 || index == 1 %>
+				<div class="boardcontainer">
+					<div class="boardinfo">
+						<h1><%= member.name + " | " + member.position %></h1>
+						<p>College and Year: <%= member.college + " \'" + member.gradyear.strftime("%y") %></p>
+						<p>Major: <%= member.major %></p>
+						<p>Email: <a href="mailto:<%= member.email %>"><%= member.email %></a></p>
+						<p class="blurb"><%= member.blurb %></p>
+					</div>
+				</div>
+			<% end %>
+		<% end %>
+
+		<% @members.each_with_index do |member, index| %>
+			<% if index >= 2 && index <= 5 %>
+				<div class="member <%= "president" if member.position == "Co-President" %>">
+					<%= image_tag member.photo.url(:display) %>
+					<span class="caption">
+						<h1><%= member.name %></h1>
+						<p><%= member.position %></p>
+						<p><%= member.collegeshort + " \'" + member.gradyear.strftime("%y") %></p>
+					</span>
+				</div>
+			<% end %>
+		<% end %>
+		<% @members.each_with_index do |member, index| %>
+			<% if index >= 2 && index <= 5 %>
+				<div class="boardcontainer">
+					<div class="boardinfo">
+						<h1><%= member.name + " | " + member.position %></h1>
+						<p>College and Year: <%= member.college + " \'" + member.gradyear.strftime("%y") %></p>
+						<p>Major: <%= member.major %></p>
+						<p>Email: <a href="mailto:<%= member.email %>"><%= member.email %></a></p>
+						<p class="blurb"><%= member.blurb %></p>
+					</div>
+				</div>
+			<% end %>
+		<% end %>
+
+		<% @members.each_with_index do |member, index| %>
+			<% if index >= 6 && index <= 9 %>
+				<div class="member <%= "president" if member.position == "Co-President" %>">
+					<%= image_tag member.photo.url(:display) %>
+					<span class="caption">
+						<h1><%= member.name %></h1>
+						<p><%= member.position %></p>
+						<p><%= member.collegeshort + " \'" + member.gradyear.strftime("%y") %></p>
+					</span>
+				</div>
+			<% end %>
+		<% end %>
+		<% @members.each_with_index do |member, index| %>
+			<% if index >= 6 && index <= 9 %>
+				<div class="boardcontainer">
+					<div class="boardinfo">
+						<h1><%= member.name + " | " + member.position %></h1>
+						<p>College and Year: <%= member.college + " \'" + member.gradyear.strftime("%y") %></p>
+						<p>Major: <%= member.major %></p>
+						<p>Email: <a href="mailto:<%= member.email %>"><%= member.email %></a></p>
+						<p class="blurb"><%= member.blurb %></p>
+					</div>
+				</div>
+			<% end %>
+		<% end %>
+
+		<div class="test">
+		</div>
+	</div>

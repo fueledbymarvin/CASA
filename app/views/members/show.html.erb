@@ -1,0 +1,48 @@
+<div id="admincontent">
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @member.name %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%= @member.position %>
+</p>
+
+<p>
+  <b>College:</b>
+  <%= @member.college %>
+</p>
+
+<p>
+  <b>Gradyear:</b>
+  <%= @member.gradyear.strftime("%y") %>
+</p>
+
+<p>
+  <b>Major:</b>
+  <%= @member.major %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @member.email %>
+</p>
+
+<p>
+  <b>Blurb:</b>
+  <%= @member.blurb %>
+</p>
+
+<p>
+  <b>Photo:</b>
+  <%= image_tag @member.photo.url(:display) %>
+</p>
+
+<%= link_to 'Edit', edit_member_path(@member) %> |
+<%= link_to 'Back', members_path %>
+
+</div>

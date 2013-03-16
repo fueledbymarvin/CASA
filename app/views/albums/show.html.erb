@@ -1,0 +1,29 @@
+<div id="admincontent">
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @album.title %>
+</p>
+
+<p>
+  <b>Info:</b>
+  <%= @album.info %>
+</p>
+
+<p>
+  <b>Facebook Link:</b>
+  <%= @album.fblink %>
+</p>
+
+<p>
+  <b>Photo:</b>
+  <%= image_tag @album.photo.url(:display) %>
+</p>
+
+
+<%= link_to 'Edit', edit_album_path(@album) %> |
+<%= link_to 'Back', albums_path %>
+
+</div>

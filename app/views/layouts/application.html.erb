@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 	<title>Chinese American Students Association of Yale University</title>
+	
+	<meta name="description" content="The Chinese American Students' Association (CASA) promotes awareness of Chinese and Chinese American culture and identity within the Yale community." />
+ 	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
+
+<script language="javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+<div id="picbg"></div>
+
+<div id="container">
+	<div id="nav">
+		<div class="navbutton">
+			<a href="/"><img src="<%= asset_path 'home hover.png' %>" alt="Home" /></a>
+			<div class="navhover"><a href="/"><img src="<%= asset_path 'home button.png' %>" alt="Home" /></a></div>
+		</div>
+
+		<div class="navbutton">
+			<a href="/about"><img src="<%= asset_path 'about hover.png' %>" alt="About" /></a>
+			<div class="navhover"><a href="/about"><img src="<%= asset_path 'about button.png' %>" alt="About" /></a></div>
+		</div>
+
+		<div class="logobutton">
+			<a href="/"><img class="dragon" src="<%= asset_path 'logo hover.png' %>" alt="Home" /></a>
+			<div class="logohover"><a href="/"><img src="<%= asset_path 'logo.png' %>" alt="Home" /></a></div>
+		</div>
+
+		<div class="navbutton">
+			<a href="/list"><img src="<%= asset_path 'events hover.png' %>" alt="Events" /></a>
+			<div class="navhover"><a href="/list"><img src="<%= asset_path 'events button.png' %>" alt="Events" /></a></div>
+		</div>
+
+		<div class="navbutton">
+			<a href="/photos"><img src="<%= asset_path 'photos hover.png' %>" alt="Photos" /></a>
+			<div class="navhover"><a href="/photos"><img src="<%= asset_path 'photos button.png' %>" alt="Photos" /></a></div>
+		</div>
+	</div>
+
+<%= yield %>
+
+</div>
+
+<div id="footer">
+	<div id="footer-container">
+		<!-- <h1>Sign up for our newsletter!</h1>
+		
+		<form class="form-inline">
+			<input class="input-xlarge" type="email" id="inputError" placeholder="Your Email Address" required>
+			<input type="image" src="<%= asset_path 'sign up button.png' %>" name="submit" value="Sign Up">
+		</form> -->
+		<br />
+		<img id="bottomdivider" src="<%= asset_path 'bottom divider.png' %>" alt="divider">
+
+		<p>© Marvin Qian 2013</p>
+	</div>
+</div>
+
+</body>
+</html>

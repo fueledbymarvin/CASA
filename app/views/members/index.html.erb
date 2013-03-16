@@ -1,0 +1,13 @@
+<div id="admincontent">
+
+<h1>Board Members</h1>
+<br />
+
+<% @members.each do |member| %>
+    <h4><%= link_to member.position, member %> - <%= member.name %> | <%= link_to 'Edit', edit_member_path(member) %></h4>
+    <br />
+<% end %>
+
+<p class="contentnav"><a href="/admin">Back to Admin Center</a></p>
+
+</div>

@@ -1,0 +1,94 @@
+<%= form_for(@event, :html => { :multipart => true }) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <br />
+  <div class="field">
+    <%= f.label :category %><br />
+    <%= f.select :category, ["News", "Social", "Cultural", "Community", "Political"], :prompt => 'Select One' %>
+  </div>
+  <br />
+  <div class="field hsfalse">
+    <%= f.label 'Date' %><br />
+    <%= f.date_select :day %>
+  </div>
+  <br />
+  <div class="field hsfalse">
+    <%= f.label 'Start Time' %><br />
+    <%= f.time_select :starttime, :ampm => true %>
+  </div>
+  <br />
+  <div class="field hsfalse">
+    <%= f.label 'Add End Time?' %><br />
+    <%= f.check_box :addend %>
+  </div>
+  <br />
+  <div class="field hsfalse endtime">
+    <%= f.label 'End Time' %><br />
+    <%= f.time_select :endtime, :ampm => true %>
+  </div>
+  <br />
+  <div class="field hsfalse">
+    <%= f.label :location %><br />
+    <%= f.text_field :location %>
+  </div>
+  <br />
+  <div class="field">
+    <%= f.label 'Use Subtitle?' %><br />
+    <%= f.check_box :hassub %>
+  </div>
+  <br />
+  <div class="field">
+    <%= f.label :subtitle %><br />
+    <%= f.text_field :subtitle, :disabled => true %>
+  </div>
+  <br />
+  <div class="field">
+    <%= f.label :info %><br />
+    <%= f.text_area :info %>
+  </div>
+  <br />
+  <% unless @event.new_record? || !@event.photo? %>
+    <div class="field">
+      <%= f.label 'Delete photo?' %><br />
+      <%= f.check_box :photo_delete %>
+    </div>
+    <br />
+  <% end %>
+  <div class="field">
+    <%= f.label :photo %><br />
+    <%= f.file_field :photo %>
+  </div>
+  <br />
+  <div class="field">
+    <%= f.label 'Add to newsletter?' %><br />
+    <%= f.check_box :newsletter %>
+  </div>
+  <br />
+  <div class="field newsletter">
+    <%= f.label :priority %><br />
+    <%= f.select :priority, [["Major CASA Event (5)", 5], ["Minor CASA Event (4)", 4], ["Other Chinese Event (3)", 3], ["Other Asian Event (2)", 2], ["Not Even Asian (1)", 1]], :prompt => 'Select One' %>
+  </div>
+  <br />
+  <div class="field newsletter">
+    <%= f.label 'News Until' %><br />
+    <%= f.date_select :newsuntil %>
+  </div>
+  <br />
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

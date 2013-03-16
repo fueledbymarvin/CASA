@@ -1,0 +1,22 @@
+	<div id="aboutheader">
+		<div class="slidercover"><img class="slider" src="<%= asset_path 'photos header.png' %>"></div>
+		<img class="circle" src="<%= asset_path 'photos circle.png' %>">
+	</div>
+
+	<div id="aboutcontent">
+		<h1 class="sectitle">All of our photos are on <a href="http://www.facebook.com/groups/2200024806/photos/" target="_blank">Facebook!</a></h1>
+
+		<% @albums.each do |album| %>
+			<div class="albumphoto">
+				<%= image_tag album.photo.url(:display) %>
+			</div>
+
+			<div class="albuminfo">
+				<h1><%= link_to album.title, album.fblink, :target => "_blank" %></h1>
+				<p><%= album.info %></p>
+			</div>
+		<% end %>
+
+		<div class="test">
+		</div>
+	</div>
