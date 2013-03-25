@@ -36,7 +36,7 @@
                                 <p style="text-align:center;font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#cd8c86;font-weight:bold;font-size:13px;"><%= event.day.strftime("%b").upcase %><br><%= event.day.strftime("%d") %></p>
                             </td>
                             <td>
-                                <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;padding-left:5px;font-size:14px;"><span style="font-size:20px;font-weight:bold;color:#cd8c86;"><%= link_to event.title, url_for(event), :target => "_blank" %></span><br>
+                                <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;padding-left:5px;font-size:14px;"><span style="font-size:20px;font-weight:bold;"><a style="color:#cd8c86;text-decoration:none;" href="<%= "http://yalecasa.herokuapp.com" + url_for(event) %>"><%= event.title %></a></span><br>
                                     <% if event.hassub %>
                                         <%= event.subtitle.html_safe %>
                                     <% else %>
