@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-	has_attached_file :photo, :styles => { :display => Proc.new { |a| a.dimensions } }
+	has_attached_file :photo, :styles => { :newsletter => "400>", :display => Proc.new { |a| a.dimensions } }
 	before_save :destroy_photo?
 
 	validates_attachment_size :photo, :less_than => 2.megabytes
@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
 	validates_presence_of :day, :starttime, :location, :unless => :hassub
 	validates_presence_of :endtime, :if => :addend
 	validates_presence_of :subtitle, :if => :hassub
+	validates :title, :length => { :maximum => 25 }
 	after_initialize :init
 
 	def init

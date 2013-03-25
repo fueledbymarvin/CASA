@@ -40,6 +40,23 @@ class EventsController < ApplicationController
     end
   end
 
+  def newsform
+    @events = Event.all
+
+    respond_to do |format|
+      format.html # newsform.html.erb
+      format.json { render json: @events }
+    end
+  end
+
+  def newsletter
+    newsdate = Date.civil(params[:newsdate][:year].to_i, params[:newsdate][:month].to_i, params[:newsdate][:day].to_i)
+    @events = Event.find(:all, :conditions => ["newsuntil >= ?", newsdate])
+    @message = params[:message]
+
+    render :layout => false
+  end
+
   # GET /events/1
   # GET /events/1.json
   def show

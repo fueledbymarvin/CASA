@@ -71,5 +71,7 @@ Casa::Application.routes.draw do
   match 'admin/manage' => 'events#manage'
   match 'admin/board' => 'members#index'
   match 'admin/albums' => 'albums#index'
+  match 'admin/newsform' => 'events#newsform'
+  match 'admin/newsletter' => 'events#newsletter', :as => "newsletter"
 
 end
