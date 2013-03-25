@@ -22,7 +22,7 @@
                     <tbody><tr>
                         <td colspan="2" style="border-bottom:1px solid #ded3b7">
                             <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;font-weight:bold;font-size:20px;padding-left:20px;">Hello friend!</p>
-                            <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;padding:0px 40px;font-size:14px;"><%= @message %></p>
+                            <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;padding:0px 40px;font-size:14px;"><%= @message.html_safe %></p>
                             <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;padding-left:60px;font-size:14px;">Best regards,</p>
                             <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;font-weight:bold;font-size:20px;padding-left:80px;"><span class="il">CASA</span> Board</p>
                         </td>
@@ -38,7 +38,7 @@
                             <td>
                                 <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;padding-left:5px;font-size:14px;"><span style="font-size:20px;font-weight:bold;color:#cd8c86;"><%= link_to event.title.html_safe, event %></span><br>
                                     <% if event.hassub %>
-                                        <%= event.subtitle %>
+                                        <%= event.subtitle.html_safe %>
                                     <% else %>
                                         <% if event.addend %>
                                             <%= event.day.strftime("%A, %B %e, %Y. ") + event.starttime.strftime("%l:%M%p").downcase + " - " + event.endtime.strftime("%l:%M%p.").downcase %>

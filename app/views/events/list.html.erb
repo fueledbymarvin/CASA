@@ -36,7 +36,7 @@
 				                <h1 class="title"><%= link_to event.title.html_safe, event %></h1>
 				                <p class="subtitle">
 				                    <% if event.hassub %>
-				                        <%= event.subtitle %>
+				                        <%= event.subtitle.html_safe %>
 				                    <% else %>
 				                        <% if event.addend %>
 				                            <%= event.day.strftime("%A, %B %e, %Y. ") + event.starttime.strftime("%l:%M%p").downcase + " - " + event.endtime.strftime("%l:%M%p.").downcase %>
@@ -70,7 +70,7 @@
 				                <h1 class="title"><%= link_to event.title.html_safe, event %></h1>
 				                <p class="subtitle">
 				                    <% if event.hassub %>
-				                        <%= event.subtitle %>
+				                        <%= event.subtitle.html_safe %>
 				                    <% else %>
 				                        <% if event.addend %>
 				                            <%= event.day.strftime("%A, %B %e, %Y. ") + event.starttime.strftime("%l:%M%p").downcase + " - " + event.endtime.strftime("%l:%M%p.").downcase %>
@@ -105,7 +105,7 @@
 				                <h1 class="title"><%= link_to event.title.html_safe, event %></h1>
 				                <p class="subtitle">
 				                    <% if event.hassub %>
-				                        <%= event.subtitle %>
+				                        <%= event.subtitle.html_safe %>
 				                    <% else %>
 				                        <% if event.addend %>
 				                            <%= event.day.strftime("%A, %B %e, %Y. ") + event.starttime.strftime("%l:%M%p").downcase + " - " + event.endtime.strftime("%l:%M%p.").downcase %>
@@ -140,7 +140,7 @@
 				                <h1 class="title"><%= link_to event.title.html_safe, event %></h1>
 				                <p class="subtitle">
 				                    <% if event.hassub %>
-				                        <%= event.subtitle %>
+				                        <%= event.subtitle.html_safe %>
 				                    <% else %>
 				                        <% if event.addend %>
 				                            <%= event.day.strftime("%A, %B %e, %Y. ") + event.starttime.strftime("%l:%M%p").downcase + " - " + event.endtime.strftime("%l:%M%p.").downcase %>
@@ -175,7 +175,7 @@
 				                <h1 class="title"><%= link_to event.title.html_safe, event %></h1>
 				                <p class="subtitle">
 				                    <% if event.hassub %>
-				                        <%= event.subtitle %>
+				                        <%= event.subtitle.html_safe %>
 				                    <% else %>
 				                        <% if event.addend %>
 				                            <%= event.day.strftime("%A, %B %e, %Y. ") + event.starttime.strftime("%l:%M%p").downcase + " - " + event.endtime.strftime("%l:%M%p.").downcase %>
@@ -210,7 +210,7 @@
 				                <h1 class="title"><%= link_to event.title.html_safe, event %></h1>
 				                <p class="subtitle">
 				                    <% if event.hassub %>
-				                        <%= event.subtitle %>
+				                        <%= event.subtitle.html_safe %>
 				                    <% else %>
 				                        <% if event.addend %>
 				                            <%= event.day.strftime("%A, %B %e, %Y. ") + event.starttime.strftime("%l:%M%p").downcase + " - " + event.endtime.strftime("%l:%M%p.").downcase %>
