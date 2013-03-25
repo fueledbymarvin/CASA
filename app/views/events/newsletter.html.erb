@@ -28,49 +28,43 @@
                         </td>
                     </tr>
 
-                    <% 5.downto(1) do |p| %>
+                    <% @events.each do |event| %>
 
-                        <% @events.each do |event| %>
+                        <tr><td colspan="2" style="padding-top:10px;"></td></tr>
+                        <tr>
+                            <td style="background-image:url('http://i.imgur.com/Rh5Au.png')" height="80" width="80">
+                                <p style="text-align:center;font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#cd8c86;font-weight:bold;font-size:13px;"><%= event.day.strftime("%b").upcase %><br><%= event.day.strftime("%d") %></p>
+                            </td>
+                            <td>
+                                <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;padding-left:5px;font-size:14px;"><span style="font-size:20px;font-weight:bold;color:#cd8c86;"><%= link_to event.title.html_safe, event %></span><br>
+                                    <% if event.hassub %>
+                                        <%= event.subtitle %>
+                                    <% else %>
+                                        <% if event.addend %>
+                                            <%= event.day.strftime("%A, %B %e, %Y. ") + event.starttime.strftime("%l:%M%p").downcase + " - " + event.endtime.strftime("%l:%M%p.").downcase %>
+                                        <% else %>
+                                            <%= event.day.strftime("%A, %B %e, %Y. ") + event.starttime.strftime("%l:%M%p.").downcase %>
+                                        <% end %>
+                                        <%= event.location + "." %>
+                                    <% end %>
+                                </p>
+                            </td>
+                        </tr>
 
-                            <% if event.priority == p %>
+                        <% if event.photo? %>
+                            <tr>
+                                <td colspan="2" style="padding:5px 0;">
+                                    <a href="<%= event.photo.url %>"><img src="<%= event.photo.url(:newsletter) %>" style="border:5px solid #332c29;border-radius:5px;"></a>
+                                </td>
+                            </tr>
+                        <% end %>
 
-                                <tr><td colspan="2" style="padding-top:10px;"></td></tr>
-                                <tr>
-                                    <td style="background-image:url('http://i.imgur.com/Rh5Au.png')" height="80" width="80">
-                                        <p style="text-align:center;font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#cd8c86;font-weight:bold;font-size:13px;"><%= event.day.strftime("%b").upcase %><br><%= event.day.strftime("%d") %></p>
-                                    </td>
-                                    <td>
-                                        <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;padding-left:5px;font-size:14px;"><span style="font-size:20px;font-weight:bold;color:#cd8c86;"><%= link_to event.title.html_safe, event %></span><br>
-                                            <% if event.hassub %>
-                                                <%= event.subtitle %>
-                                            <% else %>
-                                                <% if event.addend %>
-                                                    <%= event.day.strftime("%A, %B %e, %Y. ") + event.starttime.strftime("%l:%M%p").downcase + " - " + event.endtime.strftime("%l:%M%p.").downcase %>
-                                                <% else %>
-                                                    <%= event.day.strftime("%A, %B %e, %Y. ") + event.starttime.strftime("%l:%M%p.").downcase %>
-                                                <% end %>
-                                                <%= event.location + "." %>
-                                            <% end %>
-                                        </p>
-                                    </td>
-                                </tr>
-
-                                <% if event.photo? %>
-                                    <tr>
-                                        <td colspan="2" style="padding:5px 0;">
-                                            <a href="<%= event.photo.url %>"><img src="<%= event.photo.url(:newsletter) %>" style="border:5px solid #332c29;border-radius:5px;"></a>
-                                        </td>
-                                    </tr>
-                                <% end %>
-
-                                <tr>
-                                    <td colspan="2" style="border-bottom:1px solid #ded3b7;">
-                                        <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;font-size:14px;"><%= event.info.html_safe %></p>
-                                    </td>
-                                </tr>
-                            <% end %>
-                        <% end %>   
-                    <% end %>
+                        <tr>
+                            <td colspan="2" style="border-bottom:1px solid #ded3b7;">
+                                <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;font-size:14px;"><%= event.info.html_safe %></p>
+                            </td>
+                        </tr>
+                    <% end %>   
 
                     <tr>
                         <td colspan="2">

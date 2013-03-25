@@ -51,7 +51,7 @@ class EventsController < ApplicationController
 
   def newsletter
     newsdate = Date.civil(params[:newsdate][:year].to_i, params[:newsdate][:month].to_i, params[:newsdate][:day].to_i)
-    @events = Event.find(:all, :conditions => ["newsuntil >= ?", newsdate])
+    @events = Event.find(:all, :conditions => ["newsuntil >= ?", newsdate], :order => "priority DESC")
     @message = params[:message]
 
     render :layout => false
