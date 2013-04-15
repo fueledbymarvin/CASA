@@ -5,7 +5,8 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all(:order => 'created_at DESC', :limit => 5)
+    newsdate = Date.today;
+    @events = Event.find(:all, :conditions => ["newsuntil >= ?", newsdate], :order => "priority DESC")
 
     respond_to do |format|
       format.html # index.html.erb
