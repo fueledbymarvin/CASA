@@ -60,4 +60,14 @@ class Member < ActiveRecord::Base
 		# push non-board admin ids here
 		admins.include?(self.fbid)
 	end
+
+	def self.pres_first
+		members = self.where(position: "Co-President")
+		Member.all.each do |member|
+			if member.position != "Co-President"
+				members << member
+			end
+		end
+		members
+	end
 end

@@ -5,7 +5,7 @@ class MembersController < ApplicationController
   before_filter :authenticate, :except => [:about]
   
   def about
-    @members = Member.all
+    @members = Member.pres_first
 
     respond_to do |format|
       format.html # about.html.erb
@@ -14,7 +14,7 @@ class MembersController < ApplicationController
   end
 
   def index
-    @members = Member.all
+    @members = Member.pres_first
 
     respond_to do |format|
       format.html # index.html.erb
