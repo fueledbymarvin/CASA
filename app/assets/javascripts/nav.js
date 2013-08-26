@@ -153,7 +153,11 @@ $("document").ready(function() {
 				$(".boardcontainer:eq(" + index + ")").animate({height: 0 + "px"},{duration:300});
 			else {
 				$('.boardcontainer').each(function(){ $(this).animate({height: 0 + "px"},{duration:300}) });
-				$(".boardcontainer:eq(" + index + ")").animate({height: bioHeights[index] + "px"},{duration:300});
+				$(".boardcontainer:eq(" + index + ")").animate({height: bioHeights[index] + "px"},{duration:300, complete: function() {
+					$('html, body').animate({
+				        scrollTop: $(".member:eq(" + index + ")").offset().top
+				    }, 300);
+				}});
 			}
 		});
 	});
