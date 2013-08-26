@@ -74,4 +74,7 @@ Casa::Application.routes.draw do
   match 'admin/newsform' => 'events#newsform'
   match 'admin/newsletter' => 'events#newsletter', :as => "newsletter"
 
+  match "/auth/:provider/callback" => "sessions#create"
+  match "/signout" => "sessions#destroy", :as => :signout
+
 end

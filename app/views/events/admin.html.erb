@@ -1,14 +1,21 @@
 <div id="admincontent">
 
-<h1 class="adminlink">Welcome to the Admin Center!</h1>
-<br />
-<h1 class="adminlink"><a href="admin/manage">Manage Events</a></h1>
-<br />
-<h1 class="adminlink"><a href="admin/board">Manage Board Members</a></h1>
-<br />
-<h1 class="adminlink"><a href="admin/albums">Manage Albums</a></h1>
-<br />
-<h1 class="adminlink"><a href="admin/newsform">Create Newsletter</a></h1>
-<br />
+<% if current_member && current_member.admin_id? %>
+	<h1 class="adminlink">Welcome to the Admin Center, <%= current_member.name %>!</h1>
+	<br />
+	<h1 class="adminlink"><a href="admin/manage">Manage Events</a></h1>
+	<br />
+	<h1 class="adminlink"><a href="admin/board">Manage Board Members</a></h1>
+	<br />
+	<h1 class="adminlink"><a href="admin/albums">Manage Albums</a></h1>
+	<br />
+	<h1 class="adminlink"><a href="admin/newsform">Create Newsletter</a></h1>
+	<br />
+	<h1 class="adminlink"><%= link_to 'Sign Out', signout_path, id: "sign_out" %></h1>
+	<br />
+<% else %>
+	<h1 class="adminlink"><%= link_to 'Sign In', "/auth/facebook", id: "sign_in" %></h1>
+	<br />
+<% end %>
 
 </div>

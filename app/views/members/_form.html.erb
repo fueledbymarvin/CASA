@@ -47,6 +47,11 @@
   </div>
   <br />
   <div class="field">
+    Facebook ID (<%= link_to "help", "http://findmyfacebookid.com/", target: "blank" %>)<br /><br />
+    <%= f.text_field :fbid %>
+  </div>
+  <br />
+  <div class="field">
     <%= f.label :photo %><br />
     <%= f.file_field :photo %>
   </div>

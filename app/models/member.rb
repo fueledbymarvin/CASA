@@ -6,8 +6,8 @@ class Member < ActiveRecord::Base
 	validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
 	validate :aspect_ratio
 
-	attr_accessible :name, :position, :college, :gradyear, :major, :email, :blurb, :collegeshort, :photo
-	validates_presence_of :name, :position, :college, :gradyear, :major, :email, :blurb
+	attr_accessible :name, :position, :college, :gradyear, :major, :email, :blurb, :collegeshort, :photo, :fbid
+	validates_presence_of :name, :position, :college, :gradyear, :major, :email, :blurb, :fbid
 
 	def collegeshort
 		case self.college
@@ -53,5 +53,11 @@ class Member < ActiveRecord::Base
 		    	self.errors.add(:photo, " must be square!")
 		    end
 		end
+	end
+
+	def admin_id?
+		admins = Member.all.map { |member| member.fbid }
+		# push non-board admin ids here
+		admins.include?(self.fbid)
 	end
 end
