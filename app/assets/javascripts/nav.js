@@ -283,7 +283,6 @@ $("document").ready(function() {
 			success: function(data) {
 				var parent = $(a).parent();
 				$.each(data["events"], function(i, e) {
-					console.log(e);
 					var toAppend = '<div class="post"><div class="posticon"><img class="lantern" src="assets/lantern.png" alt="Lantern"><h3 class="date">' + data["dates"][i].month + '<br />' + data["dates"][i].day + '</h3></div>';
 					toAppend += '<div class="posttitles"><h1 class="title"><a href="/events/'+ e.id +'">'+ e.title +'</a></h1><p class="subtitle">';
 					if(e.hassub)
@@ -301,9 +300,10 @@ $("document").ready(function() {
 					parent.append(toAppend);
 				});
 				var pos = parseInt($(a).data("pos"));
+				var category = $(a).data("category");
 				$(a).remove();
 				if(pos + 5 < data["total"])
-					parent.append('<a href="#" class="more" data-pos="' + (pos + 5) + '"><p>Load More</p></a>')
+					parent.append('<a href="#" class="more" data-pos="' + (pos + 5) + '" data-category="' + category + '"><p>Load More</p></a>')
 				$('#eventcontainer').css("height", parent.height() + 150 + "px");
 				$('.more').click(function(e) {
 					e.preventDefault();
