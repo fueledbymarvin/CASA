@@ -303,7 +303,7 @@ $("document").ready(function() {
 				var pos = parseInt($(a).data("pos"));
 				$(a).remove();
 				if(pos + 5 < data["total"])
-					parent.append('<a href="#" class="more" data-pos="' + pos + 5 + '"><p>Load More</p></a>')
+					parent.append('<a href="#" class="more" data-pos="' + (pos + 5) + '"><p>Load More</p></a>')
 				$('#eventcontainer').css("height", parent.height() + 150 + "px");
 				$('.more').click(function(e) {
 					e.preventDefault();
