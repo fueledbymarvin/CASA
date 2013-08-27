@@ -118,13 +118,12 @@ $("document").ready(function() {
 		$(".eventbutton").each(function() {
 
 			$(this).click(function() {
-				for(var i=0; i<$('.eventsection').length; i++)
-					eventHeights[i] = $(".eventsection:eq(" + i + ")").height() + 50;
 				if($(this).hasClass("eventclicked"))
 					;
 				else {
 					for(var i=0; i<$('.eventtype').length; i++) {
 						if($(".eventbutton:eq(" + i + ")").hasClass("eventclicked")) {
+							eventHeights[i] = $(".eventsection:eq(" + i + ")").height() + 50;
 							$(".eventbutton:eq(" + i + ")").removeClass("eventclicked");
 							$(".eventtype:eq(" + i + ")").animate({width:'0px'},{duration:300});
 						}	
@@ -302,13 +301,16 @@ $("document").ready(function() {
 				var pos = parseInt($(a).data("pos"));
 				var category = $(a).data("category");
 				$(a).remove();
-				if(pos + 5 < data["total"])
-					parent.append('<a href="#" class="more" data-pos="' + (pos + 5) + '" data-category="' + category + '"><p>Load More</p></a>')
-				$('#eventcontainer').css("height", parent.height() + 150 + "px");
-				$('.more').click(function(e) {
-					e.preventDefault();
-					more(this);
-				});
+				if(pos + 5 < data["total"]) {
+					readd = $('<a href="#" class="more" data-pos="' + (pos + 5) + '" data-category="' + category + '"><p>Load More</p></a>')
+					readd.click(function(e) {
+						e.preventDefault();
+						$(this).children('p').text("Loading...");
+						more(this);
+					});
+					parent.append(readd);
+				}
+				$('#eventcontainer').css("height", parent.height() + 50 + "px");
 			}
 		});
 	}
