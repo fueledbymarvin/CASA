@@ -66,6 +66,7 @@ Casa::Application.routes.draw do
 
   match 'about' => 'members#about'
   match 'list' => 'events#list'
+  match 'list/more' => 'events#more'
   match 'photos' => 'albums#photos'
   match 'admin' => 'events#admin'
   match 'admin/manage' => 'events#manage'

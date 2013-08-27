@@ -38,7 +38,7 @@
             <p class="postbottom"><%= link_to 'Destroy', event, confirm: 'Are you sure?', method: :delete %></p>
         </div>
     <% end %>
-
+<%= will_paginate @events %>
 <p class="contentnav"><a href="/admin">Back to Admin Center</a></p>
 
 </div>

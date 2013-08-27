@@ -109,7 +109,7 @@ $("document").ready(function() {
 		//event sections
 		var eventHeights = new Array();
 		for(var i=0; i<$('.eventsection').length; i++)
-			eventHeights[i] = $(".eventsection:eq(" + i + ")").height();
+			eventHeights[i] = $(".eventsection:eq(" + i + ")").height() + 50;
 		$('#eventcontainer').css("height", eventHeights[esect]+"px");
 
 		$("#eventcontent").css("margin-left", -900 * esect + "px");
@@ -118,6 +118,8 @@ $("document").ready(function() {
 		$(".eventbutton").each(function() {
 
 			$(this).click(function() {
+				for(var i=0; i<$('.eventsection').length; i++)
+					eventHeights[i] = $(".eventsection:eq(" + i + ")").height() + 50;
 				if($(this).hasClass("eventclicked"))
 					;
 				else {
@@ -266,6 +268,49 @@ $("document").ready(function() {
 			$(".newsletter :input").prop("disabled", true);
 	});
 
-	//rawr change change change
+	//pagination
+	$('.more').click(function(e) {
+		e.preventDefault();
+		$(this).children('p').text("Loading...");
+		more(this);
+	});
+	function more(a) {
+		$.ajax({
+			type: "GET",
+			data: "pos=" + $(a).data("pos") + "&category=" + $(a).data("category"),
+			dataType: "json",
+			url: "/list/more",
+			success: function(data) {
+				var parent = $(a).parent();
+				$.each(data["events"], function(i, e) {
+					console.log(e);
+					var toAppend = '<div class="post"><div class="posticon"><img class="lantern" src="assets/lantern.png" alt="Lantern"><h3 class="date">' + data["dates"][i].month + '<br />' + data["dates"][i].day + '</h3></div>';
+					toAppend += '<div class="posttitles"><h1 class="title"><a href="/events/'+ e.id +'">'+ e.title +'</a></h1><p class="subtitle">';
+					if(e.hassub)
+						toAppend += e.subtitle;
+					else {
+						toAppend += data["dates"][i].date + " ";
+						toAppend += data["dates"][i].time + " ";
+						toAppend += e.location + '.';
+					}
+					toAppend += '</p></div>';
+					if(data["photos"][i].has)
+						toAppend += '<div class="postphoto"><a href="' + data["photos"][i].full + '"><img src="' + data["photos"][i].display + '" /></a></div>';
+					toAppend += '<p class="postcontent">'+ e.info +'</p><p class="postbottom">posted under <a href="list?=' + e.category + '">' + e.category + '</a></p>';
+					toAppend += '</div>';
+					parent.append(toAppend);
+				});
+				var pos = parseInt($(a).data("pos"));
+				$(a).remove();
+				if(pos + 5 < data["total"])
+					parent.append('<a href="#" class="more" data-pos="' + pos + 5 + '"><p>Load More</p></a>')
+				$('#eventcontainer').css("height", parent.height() + 150 + "px");
+				$('.more').click(function(e) {
+					e.preventDefault();
+					more(this);
+				});
+			}
+		});
+	}
 
 });

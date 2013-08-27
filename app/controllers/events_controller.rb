@@ -15,11 +15,62 @@ class EventsController < ApplicationController
   end
 
   def list
-    @events = Event.all(:order => 'created_at DESC')
+    categories = ["All", "News", "Social", "Cultural", "Community", "Political"]
+    @events = {}
+    @totals = {}
+    categories.each do |c|
+      if c == "All"
+        @totals[c] = Event.all.count
+      else
+        @totals[c] = Event.where(category: c).count
+      end
+    end
+    categories.each do |c|
+      if c == "All"
+        @events[c] = @totals[c] > 5 ? Event.all(order: 'created_at DESC')[0...5] : Event.all(order: 'created_at DESC')
+      else
+        @events[c] = @totals[c] > 5 ? Event.where(category: c).order('created_at DESC')[0...5] : Event.where(category: c).order('created_at DESC')
+      end
+    end
 
     respond_to do |format|
       format.html # list.html.erb
       format.json { render json: @events }
+    end
+  end
+
+  def more
+    pos = Integer(params[:pos])
+    category = params[:category]
+    if category == "All"
+      total = Event.all.count
+      events = pos + 5 >= total ? Event.all(:order => 'created_at DESC')[pos...total] : Event.all(:order => 'created_at DESC')[pos...(pos + 5)]
+    else
+      total = Event.where(category: category).count
+      events = pos + 5 >= total ? Event.where(category: category).order('created_at DESC')[pos...total] : Event.where(category: category).order('created_at DESC')[pos...(pos + 5)]
+    end
+    dates = events.map do |event|
+      temp = {}
+      temp["month"] = event.day.strftime("%b").upcase
+      temp["day"] = event.day.strftime("%d")
+      if !event.hassub
+        temp["date"] = event.day.strftime("%A, %B %e, %Y. ")
+        temp["time"] = event.addend? ? event.starttime.strftime("%l:%M%p").downcase + " - " + event.endtime.strftime("%l:%M%p.").downcase : event.starttime.strftime("%l:%M%p.").downcase
+      end
+      temp
+    end
+    photos = events.map do |event|
+      temp = {}
+      temp["has"] = event.photo?
+      if event.photo?
+        temp["full"] = event.photo.url
+        temp["display"] = event.photo.url(:display)
+      end
+      temp
+    end
+
+    respond_to do |format|
+      format.json { render layout: false, json: { events: events, total: total, dates: dates, photos: photos } }
     end
   end
 
@@ -33,7 +84,7 @@ class EventsController < ApplicationController
   end
 
   def manage
-    @events = Event.all(:order => 'created_at DESC')
+    @events = Event.paginate(:page => params[:page], :per_page => 5).order('created_at DESC')
 
     respond_to do |format|
       format.html # manage.html.erb

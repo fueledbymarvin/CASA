@@ -33,6 +33,8 @@ gem 'aws-sdk'
 
 gem 'omniauth-facebook', '1.4.0'
 
+gem 'will_paginate'
+
 gem 'newrelic_rpm'
 
 # To use ActiveModel has_secure_password
