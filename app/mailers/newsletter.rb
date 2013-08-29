@@ -12,6 +12,6 @@ class Newsletter < ActionMailer::Base
 
     subject = addendum ? "CASA Newsletter Addendum" : "CASA Weekly Newsletter"
 
-    mail to: "marvin.qian@yale.edu", subject: "#{subject}: #{date.strftime("%B %e, %Y")}"
+    mail to: "casa-list@mailman.yale.edu", subject: "#{subject}: #{date.strftime("%B %e, %Y")}"
   end
 end
