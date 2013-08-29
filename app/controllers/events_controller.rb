@@ -104,8 +104,10 @@ class EventsController < ApplicationController
   def newsletter
     newsdate = Date.civil(params[:newsdate][:year].to_i, params[:newsdate][:month].to_i, params[:newsdate][:day].to_i)
     @events = Event.find(:all, :conditions => ["newsuntil >= ?", newsdate], :order => "priority DESC")
-    @message = params[:message]
-
+    @message = params[:addendum] ? params[:message] : "This is your weekly newsletter for the week of #{newsdate.strftime("%B %e, %Y")}. " + params[:message]
+    if params[:commit] == "Send"
+      Newsletter.weekly(@events, @message, newsdate, params[:addendum]).deliver
+    end
     render :layout => false
   end
 

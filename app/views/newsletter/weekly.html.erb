@@ -54,7 +54,7 @@
                         <% if event.photo? %>
                             <tr>
                                 <td colspan="2" style="padding:5px 0;">
-                                    <a href="<%= event.photo.url %>"><img src="<%= event.photo.url(:newsletter) %>" style="border:5px solid #332c29;border-radius:5px;"></a>
+                                    <a href="<%= "http://yalecasa.herokuapp.com" + event.photo.url %>"><img src="<%= "http://yalecasa.herokuapp.com" + event.photo.url(:newsletter) %>" style="border:5px solid #332c29;border-radius:5px;"></a>
                                 </td>
                             </tr>
                         <% end %>
