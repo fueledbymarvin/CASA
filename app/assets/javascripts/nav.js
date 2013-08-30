@@ -271,6 +271,10 @@ $("document").ready(function() {
 	$('.more').click(function(e) {
 		e.preventDefault();
 		$(this).children('p').text("Loading...");
+		$(this).off('click');
+		$(this).click(function(e) {
+			e.preventDefault();
+		});
 		more(this);
 	});
 	function more(a) {
@@ -310,7 +314,7 @@ $("document").ready(function() {
 					});
 					parent.append(readd);
 				}
-				$(window).load(function() {
+				$('#eventcontainer img').load(function() {
 					$('#eventcontainer').css("height", parent.height() + 50 + "px");
 				});
 			}
