@@ -310,7 +310,9 @@ $("document").ready(function() {
 					});
 					parent.append(readd);
 				}
-				$('#eventcontainer').css("height", parent.height() + 50 + "px");
+				$(window).load(function() {
+					$('#eventcontainer').css("height", parent.height() + 50 + "px");
+				});
 			}
 		});
 	}
