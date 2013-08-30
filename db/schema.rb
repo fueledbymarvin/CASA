@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130830130436) do
+ActiveRecord::Schema.define(:version => 20130830212112) do
 
   create_table "albums", :force => true do |t|
     t.string   "title"
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(:version => 20130830130436) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.boolean  "fb"
+    t.string   "fbid"
   end
 
   create_table "members", :force => true do |t|

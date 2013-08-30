@@ -12,49 +12,50 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <br />
   <div class="field">
-    <%= f.label :position %><br />
+    <%= f.label :position %>
     <%= f.text_field :position %>
   </div>
   <br />
   <div class="field">
-    <%= f.label :college %><br />
+    <%= f.label :college %>
     <%= f.select :college, ["Berkeley", "Branford", "Calhoun", "Davenport", "Ezra Stiles", "Jonathan Edwards", "Morse", "Pierson", "Saybrook", "Silliman", "Timothy Dwight", "Trumbull"], :prompt => 'Select One' %>
   </div>
   <br />
   <div class="field">
-    <%= f.label 'Graduation Year' %><br />
+    <%= f.label 'Graduation Year' %>
     <%= f.date_select :gradyear, { :start_year => DateTime.now.year + 1, :end_year => DateTime.now.year + 4, :discard_day => true, :discard_month => true, :prompt => "Select One" } %>
   </div>
   <br />
   <div class="field">
-    <%= f.label :major %><br />
+    <%= f.label :major %>
     <%= f.text_field :major %>
   </div>
   <br />
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :email %>
     <%= f.text_field :email %>
   </div>
   <br />
   <div class="field">
-    <%= f.label :blurb %><br />
+    <%= f.label :blurb %>
     <%= f.text_area :blurb %>
   </div>
   <br />
   <div class="field">
-    Facebook ID (<%= link_to "help", "http://findmyfacebookid.com/", target: "blank" %>)<br /><br />
+    Facebook ID (<%= link_to "help", "http://findmyfacebookid.com/", target: "blank" %>)<br />
     <%= f.text_field :fbid %>
   </div>
   <br />
   <div class="field">
-    <%= f.label :photo %><br />
+    <%= f.label :photo %>
     <%= f.file_field :photo %>
   </div>
+  <br />
   <br />
   <div class="actions">
     <%= f.submit %>

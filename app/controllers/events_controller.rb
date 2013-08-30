@@ -145,6 +145,11 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
+        if params[:event][:fb] == "1" && params[:fb_prev] == "false" || params[:fb_prev].blank?
+          @event.create_fb(session[:member_id])
+        elsif params[:event][:fb] == "0" && params[:fb_prev] == "true"
+          @event.destroy_fb(session[:member_id])
+        end
         format.html { redirect_to '/admin/manage', notice: 'Event was successfully created.' }
         format.json { render json: @event, status: :created, location: @event }
       else
@@ -161,6 +166,11 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
+        if params[:event][:fb] == "1" && params[:fb_prev] == "false"
+          @event.create_fb(session[:member_id])
+        elsif params[:event][:fb] == "0" && params[:fb_prev] == "true"
+          @event.destroy_fb(session[:member_id])
+        end
         format.html { redirect_to '/admin/manage', notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else
