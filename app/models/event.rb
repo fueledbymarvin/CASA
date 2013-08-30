@@ -59,6 +59,8 @@ class Event < ActiveRecord::Base
 			end
 			params[:privacy_type] = "SECRET"
 			params.each { |k, v| params[k] = strip_tags(v).gsub(/&nbsp;/, " ") }
+			picture = Koala::UploadableIO.new(open("http://localhost:3000" + self.photo.url(:display)).path, 'image')
+			params[:picture] = picture
 			self.fbid = m.facebook.put_connections("me", "events", params)["id"]
 			self.save
 		end
