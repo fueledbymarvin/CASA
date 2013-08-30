@@ -6,7 +6,7 @@ class Member < ActiveRecord::Base
 	validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
 	validate :aspect_ratio
 
-	attr_accessible :name, :position, :college, :gradyear, :major, :email, :blurb, :collegeshort, :photo, :fbid
+	attr_accessible :name, :position, :college, :gradyear, :major, :email, :blurb, :collegeshort, :photo, :fbid, :oauth_token, :oauth_expires_at
 	validates_presence_of :name, :position, :college, :gradyear, :major, :email, :blurb, :fbid
 
 	def collegeshort
@@ -69,5 +69,15 @@ class Member < ActiveRecord::Base
 			end
 		end
 		members
+	end
+
+	def add_token(auth)
+		self.oauth_token = auth.credentials.token
+		self.oauth_expires_at = Time.at(auth.credentials.expires_at)
+		self.save
+	end
+
+	def facebook
+		@facebook ||= Koala::Facebook::API.new(oauth_token)
 	end
 end

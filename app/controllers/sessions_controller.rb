@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
 		auth = env["omniauth.auth"]
 		member = Member.find_by_fbid(auth.uid)
 		if member && member.admin_id?
+			member.add_token(auth)
 			session[:member_id] = member.id
 			source = session[:source] || :root
 			session[:source] = nil
