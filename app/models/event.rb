@@ -71,16 +71,17 @@ class Event < ActiveRecord::Base
 	def fb_params
 		params = { name: self.title, description: self.info }
 		if self.hassub
-			params[:start_time] = merge_date_time(self.day, Time.new.midnight).to_s
+			params[:start_time] = merge_date_time(self.day, Time.new.midnight).to_s.gsub(/(-|\+)\d{2}:\d{2}/, "-04:00")
 		else
-			params[:start_time] = merge_date_time(self.day, self.starttime).to_s
+			params[:start_time] = merge_date_time(self.day, self.starttime).to_s.gsub(/(-|\+)\d{2}:\d{2}/, "-04:00")
 			params[:location] = self.location
 			if self.addend
-				params[:end_time] = merge_date_time(self.day, self.endtime).to_s
+				params[:end_time] = merge_date_time(self.day, self.endtime).to_s.gsub(/(-|\+)\d{2}:\d{2}/, "-04:00")
 			end
 		end
 		params[:privacy_type] = "SECRET"
 		params.each { |k, v| params[k] = strip_tags(v).gsub(/&nbsp;/, " ") }
+		p merge_date_time(self.day, self.starttime).to_s
 		if self.photo.exists?
 			picture = Koala::UploadableIO.new(open("http://localhost:3000" + self.photo.url(:display)).path, 'image')
 			params[:picture] = picture
