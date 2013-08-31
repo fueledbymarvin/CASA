@@ -49,6 +49,18 @@ class Event < ActiveRecord::Base
 			m = Member.find(member)
 			self.fbid = m.facebook.put_connections("me", "events", self.fb_params)["id"]
 			self.save
+
+			groups = m.facebook.get_connections("me", "groups")
+			casa_id = ""
+			groups.each do |group|
+				if group["name"] == "Test Group" # "Chinese American Students Association (CASA) of Yale"
+					casa_id = group["id"]
+				end
+			end
+			members = m.facebook.get_connections(casa_id, "members")
+			member_ids = []
+			members.each { |member| member_ids << member["id"] }
+			m.facebook.put_connections(self.fbid, "invited", users: member_ids.join(","))
 		end
 	end
 
@@ -81,9 +93,12 @@ class Event < ActiveRecord::Base
 		end
 		params[:privacy_type] = "SECRET"
 		params.each { |k, v| params[k] = strip_tags(v).gsub(/&nbsp;/, " ") }
-		p merge_date_time(self.day, self.starttime).to_s
 		if self.photo.exists?
-			picture = Koala::UploadableIO.new(open("http://localhost:3000" + self.photo.url(:display)).path, 'image')
+			img_host = ""
+			if Rails.env == "development"
+				img_host = "http://localhost:3000"
+			end
+			picture = Koala::UploadableIO.new(open(img_host + self.photo.url(:display)).path, 'image')
 			params[:picture] = picture
 		end
 		params
