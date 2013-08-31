@@ -53,7 +53,7 @@ class Event < ActiveRecord::Base
 			groups = m.facebook.get_connections("me", "groups")
 			casa_id = ""
 			groups.each do |group|
-				if group["name"] == "Test Group" # "Chinese American Students Association (CASA) of Yale"
+				if group["name"] == "Chinese American Students Association (CASA) of Yale"
 					casa_id = group["id"]
 				end
 			end
