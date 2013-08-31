@@ -145,10 +145,8 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        if params[:event][:fb] == "1" && params[:fb_prev] == "false" || params[:fb_prev].blank?
+        if params[:event][:fb] == "1"
           @event.create_fb(session[:member_id])
-        elsif params[:event][:fb] == "0" && params[:fb_prev] == "true"
-          @event.destroy_fb(session[:member_id])
         end
         format.html { redirect_to '/admin/manage', notice: 'Event was successfully created.' }
         format.json { render json: @event, status: :created, location: @event }
@@ -168,6 +166,8 @@ class EventsController < ApplicationController
       if @event.update_attributes(params[:event])
         if params[:event][:fb] == "1" && params[:fb_prev] == "false"
           @event.create_fb(session[:member_id])
+        elsif params[:event][:fb] == "1" && params[:fb_prev] == "true"
+          @event.update_fb(session[:member_id])
         elsif params[:event][:fb] == "0" && params[:fb_prev] == "true"
           @event.destroy_fb(session[:member_id])
         end
@@ -184,6 +184,9 @@ class EventsController < ApplicationController
   # DELETE /events/1.json
   def destroy
     @event = Event.find(params[:id])
+    if @event.fbid
+      @event.destroy_fb(session[:member_id])
+    end
     @event.destroy
 
     respond_to do |format|

@@ -47,22 +47,15 @@ class Event < ActiveRecord::Base
 	def create_fb(member)
 		if self.fbid.nil?
 			m = Member.find(member)
-			params = { name: self.title, description: self.info }
-			if self.hassub
-				params[:start_time] = merge_date_time(self.day, Time.new.midnight).to_s
-			else
-				params[:start_time] = merge_date_time(self.day, self.starttime).to_s
-				params[:location] = self.location
-				if self.addend
-					params[:end_time] = merge_date_time(self.day, self.endtime).to_s
-				end
-			end
-			params[:privacy_type] = "SECRET"
-			params.each { |k, v| params[k] = strip_tags(v).gsub(/&nbsp;/, " ") }
-			picture = Koala::UploadableIO.new(open("http://localhost:3000" + self.photo.url(:display)).path, 'image')
-			params[:picture] = picture
-			self.fbid = m.facebook.put_connections("me", "events", params)["id"]
+			self.fbid = m.facebook.put_connections("me", "events", self.fb_params)["id"]
 			self.save
+		end
+	end
+
+	def update_fb(member)
+		if self.fbid
+			m = Member.find(member)
+			m.facebook.graph_call("/#{self.fbid}", self.fb_params, "post")
 		end
 	end
 
@@ -73,6 +66,26 @@ class Event < ActiveRecord::Base
 			self.fbid = nil
 			self.save
 		end
+	end
+
+	def fb_params
+		params = { name: self.title, description: self.info }
+		if self.hassub
+			params[:start_time] = merge_date_time(self.day, Time.new.midnight).to_s
+		else
+			params[:start_time] = merge_date_time(self.day, self.starttime).to_s
+			params[:location] = self.location
+			if self.addend
+				params[:end_time] = merge_date_time(self.day, self.endtime).to_s
+			end
+		end
+		params[:privacy_type] = "SECRET"
+		params.each { |k, v| params[k] = strip_tags(v).gsub(/&nbsp;/, " ") }
+		if self.photo.exists?
+			picture = Koala::UploadableIO.new(open("http://localhost:3000" + self.photo.url(:display)).path, 'image')
+			params[:picture] = picture
+		end
+		params
 	end
 
 	def merge_date_time(date_to_merge, time_to_merge)
