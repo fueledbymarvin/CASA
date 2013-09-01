@@ -4,7 +4,7 @@ class SlidesController < ApplicationController
   # GET /slides/new
   # GET /slides/new.json
   def new
-    @slide = slide.new
+    @slide = Slide.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -15,7 +15,7 @@ class SlidesController < ApplicationController
   # POST /slides
   # POST /slides.json
   def create
-    @slide = slide.new(params[:slide])
+    @slide = Slide.new(params[:slide])
 
     respond_to do |format|
       if @slide.save
