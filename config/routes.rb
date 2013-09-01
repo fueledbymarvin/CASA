@@ -1,17 +1,11 @@
 Casa::Application.routes.draw do
-  get "slides/new"
-
-  get "slides/edit"
-
-  get "slides/create"
-
-  get "slides/update"
-
   resources :albums
 
   resources :members
 
   resources :events
+
+  resources :slides
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

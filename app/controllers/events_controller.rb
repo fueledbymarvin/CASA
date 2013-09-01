@@ -1,12 +1,13 @@
 class EventsController < ApplicationController
 
-  before_filter :authenticate, :except => [:index, :list, :photos, :show]
+  before_filter :authenticate, :except => [:index, :list, :photos, :show, :more]
 
   # GET /events
   # GET /events.json
   def index
     newsdate = Date.today;
     @events = Event.find(:all, :conditions => ["newsuntil >= ?", newsdate], :order => "priority DESC")
+    @slides = Slide.all
 
     respond_to do |format|
       format.html # index.html.erb

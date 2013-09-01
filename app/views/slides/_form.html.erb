@@ -1,0 +1,23 @@
+<%= form_for(@slide) do |f| %>
+  <% if @slide.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@slide.errors.count, "error") %> prohibited this slide from being saved:</h2>
+
+      <ul>
+      <% @slide.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :photo %>
+    <%= f.file_field :photo %>
+  </div>
+  <br />
+  <br />
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

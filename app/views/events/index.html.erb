@@ -1,11 +1,9 @@
 	<div id="header">
 		<div id="slideshow">
 			<div id="pictures">
-				<img id="pic1" class="pic" src="<%= asset_path 'pic1.jpg' %>" alt="pic1">
-				<img id="pic2" class="pic" src="<%= asset_path 'pic2.jpg' %>" alt="pic2">
-				<img id="pic3" class="pic" src="<%= asset_path 'pic3.jpg' %>" alt="pic3">
-				<img id="pic4" class="pic" src="<%= asset_path 'pic4.jpg' %>" alt="pic4">
-				<img id="pic5" class="pic" src="<%= asset_path 'pic5.jpg' %>" alt="pic5">
+				<% @slides.each_with_index do |slide, i| %>
+					<%= image_tag slide.photo.url(:display), class: "pic", id: "pic#{i+1}" %>
+				<% end %>
 			</div>
 
 			<img id="nextpic" name="nextpic" src="<%= asset_path 'change pic button.png' %>" alt="Next Picture" onMouseOver="nextpic.src='<%= asset_path 'change pic hover.png' %>'" onMouseOut="nextpic.src='<%= asset_path 'change pic button.png' %>'">

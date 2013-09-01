@@ -1,0 +1,14 @@
+<div id="admincontent">
+
+<h1>Slideshow Photos</h1>
+<br />
+
+<% @slides.each do |slide| %>
+	<%= image_tag slide.photo.url(:display) %>
+    <h4><%= link_to "Change", edit_slide_path(slide) %></h4>
+    <br />
+<% end %>
+
+<p class="contentnav"><a href="/admin">Back to Admin Center</a></p>
+
+</div>
