@@ -1,33 +1,6 @@
 class SlidesController < ApplicationController
   before_filter :authenticate
 
-  # GET /slides/new
-  # GET /slides/new.json
-  def new
-    @slide = Slide.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @slide }
-    end
-  end
-
-  # POST /slides
-  # POST /slides.json
-  def create
-    @slide = Slide.new(params[:slide])
-
-    respond_to do |format|
-      if @slide.save
-        format.html { redirect_to "/slides", notice: 'slide was successfully created.' }
-        format.json { render json: @slide, status: :created, location: @slide }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @slide.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   def index
     @slides = Slide.all
 
