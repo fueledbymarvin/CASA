@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130830212112) do
+ActiveRecord::Schema.define(:version => 20130901135424) do
 
   create_table "albums", :force => true do |t|
     t.string   "title"
@@ -66,6 +66,15 @@ ActiveRecord::Schema.define(:version => 20130830212112) do
     t.integer  "fbid"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
+  end
+
+  create_table "slides", :force => true do |t|
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
 end
