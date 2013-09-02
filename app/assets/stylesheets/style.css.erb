@@ -128,15 +128,32 @@ a:hover {
 	top: 320px;
 }
 
+#subscribe {
+	text-align: center;
+	margin-top: 134px;
+}
+
+#subscribe input[type="email"] {
+	width: 180px;
+}
+
+#subscribe input[type="submit"] {
+	width: 214px;
+	height: 46px;
+	margin-top: 6px;
+	opacity: 0;
+}
+
 #contact {
 	float: left;
 	width: 260px;
 	height: 360px;
-	background: url('/assets/contact bg.png');
+	background: url('<%= asset_path "contact bg.png" %>');
 }
 
 #contactlinks {
-	margin-top: 240px;
+	position: absolute;
+	top: 240px;
 }
 
 .contacthover {
@@ -147,15 +164,15 @@ a:hover {
 }
 
 .facebook {
-	top: 240px;
+	top: 0px;
 }
 
 .gmail {
-	top: 280px;
+	top: 40px;
 }
 
 .yale {
-	top: 320px;
+	top: 80px;
 }
 
 #topdivider {

@@ -10,6 +10,12 @@
 		</div>
 
 		<div id="contact">
+			<div id="subscribe">
+				<%= form_tag("", method: :post) do %>
+					<%= email_field_tag "email", nil, placeholder: "you.should@do.it" %>
+					<%= submit_tag %>
+				<% end %>
+			</div>
 			<div id="contactlinks">
 				<div class="contactbutton">
 					<a href="http://www.facebook.com/groups/2200024806/" target="_blank"><img src="<%= asset_path 'facebook hover.png' %>" alt="Facebook" /></a>
