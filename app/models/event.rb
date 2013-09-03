@@ -91,7 +91,6 @@ class Event < ActiveRecord::Base
 				params[:end_time] = merge_date_time(self.day, self.endtime).to_s.gsub(/(-|\+)\d{2}:\d{2}/, "-04:00")
 			end
 		end
-		params[:privacy_type] = "SECRET"
 		params.each { |k, v| params[k] = strip_tags(v).gsub(/&nbsp;/, " ") }
 		if self.photo.exists?
 			img_host = ""
