@@ -106,4 +106,12 @@ class Event < ActiveRecord::Base
 	def merge_date_time(date_to_merge, time_to_merge)
 		merged_datetime = DateTime.new(date_to_merge.year, date_to_merge.month, date_to_merge.day, time_to_merge.hour, time_to_merge.min, time_to_merge.sec)
 	end
+
+	def self.news(date)
+		events = []
+		self.find(:all, :conditions => ["newsuntil >= ?", date]).map { |event| event.priority }.uniq.sort.reverse.each do |pr|
+			events = events + self.where(priority: pr).sort_by { |event| event.newsuntil }
+		end
+		events
+	end
 end

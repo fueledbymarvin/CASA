@@ -57,14 +57,13 @@ class Member < ActiveRecord::Base
 
 	def admin_id?
 		admins = Member.all.map { |member| member.fbid }
-		# push non-board admin ids here
 		admins.include?(self.fbid)
 	end
 
 	def self.pres_first
 		members = self.where(position: "Co-President")
 		Member.all.each do |member|
-			if member.position != "Co-President"
+			if member.position != "Co-President" && member.fbid != 594889925
 				members << member
 			end
 		end

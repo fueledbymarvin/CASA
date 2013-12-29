@@ -5,8 +5,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    newsdate = Date.today;
-    @events = Event.find(:all, :conditions => ["newsuntil >= ?", newsdate], :order => "priority DESC")
+    @events = Event.news(Date.today)
     @slides = Slide.all
 
     respond_to do |format|
@@ -28,9 +27,9 @@ class EventsController < ApplicationController
     end
     categories.each do |c|
       if c == "All"
-        @events[c] = @totals[c] > 5 ? Event.all(order: 'created_at DESC')[0...5] : Event.all(order: 'created_at DESC')
+        @events[c] = @totals[c] > 5 ? Event.all(order: 'updated_at DESC')[0...5] : Event.all(order: 'updated_at DESC')
       else
-        @events[c] = @totals[c] > 5 ? Event.where(category: c).order('created_at DESC')[0...5] : Event.where(category: c).order('created_at DESC')
+        @events[c] = @totals[c] > 5 ? Event.where(category: c).order('updated_at DESC')[0...5] : Event.where(category: c).order('updated_at DESC')
       end
     end
 
@@ -45,10 +44,10 @@ class EventsController < ApplicationController
     category = params[:category]
     if category == "All"
       total = Event.all.count
-      events = pos + 5 >= total ? Event.all(:order => 'created_at DESC')[pos...total] : Event.all(:order => 'created_at DESC')[pos...(pos + 5)]
+      events = pos + 5 >= total ? Event.all(:order => 'updated_at DESC')[pos...total] : Event.all(:order => 'updated_at DESC')[pos...(pos + 5)]
     else
       total = Event.where(category: category).count
-      events = pos + 5 >= total ? Event.where(category: category).order('created_at DESC')[pos...total] : Event.where(category: category).order('created_at DESC')[pos...(pos + 5)]
+      events = pos + 5 >= total ? Event.where(category: category).order('updated_at DESC')[pos...total] : Event.where(category: category).order('updated_at DESC')[pos...(pos + 5)]
     end
     dates = events.map do |event|
       temp = {}
@@ -85,7 +84,7 @@ class EventsController < ApplicationController
   end
 
   def manage
-    @events = Event.paginate(:page => params[:page], :per_page => 5).order('created_at DESC')
+    @events = Event.paginate(:page => params[:page], :per_page => 5).order('updated_at DESC')
 
     respond_to do |format|
       format.html # manage.html.erb
@@ -104,7 +103,7 @@ class EventsController < ApplicationController
 
   def newsletter
     newsdate = Date.civil(params[:newsdate][:year].to_i, params[:newsdate][:month].to_i, params[:newsdate][:day].to_i)
-    @events = Event.find(:all, :conditions => ["newsuntil >= ?", newsdate], :order => "priority DESC")
+    @events = Event.news(newsdate)
     @message = params[:addendum] ? params[:message] : "This is your weekly newsletter for the week of #{newsdate.strftime("%B %e, %Y")}. " + params[:message]
     if params[:commit] == "Send"
       Newsletter.weekly(@events, @message, newsdate, params[:addendum]).deliver
