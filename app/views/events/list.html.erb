@@ -26,8 +26,13 @@
 			<div id="eventcontent">
 				<% @events.each do |category, events| %>
 					<div class="eventsection">
-						<% events.each do |event| %>
-							<%= render event %>
+						<% if events.any? %>
+							<% events.each do |event| %>
+								<%= render event %>
+						  <% end %>
+						<% else %>
+							<h1 class="title">No events.</h1>
+							<br />
 						<% end %>
 						<% if @totals[category] > 5 %>
 							<a href="#" class="more" data-pos="5" data-category="<%= category %>"><p>Load More</p></a>
