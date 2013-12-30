@@ -34,6 +34,7 @@ GEM
       json (~> 1.4)
       nokogiri (< 1.6.0)
       uuidtools (~> 2.1)
+    bluecloth (2.2.0)
     builder (3.0.4)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -163,6 +164,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk
+  bluecloth (>= 2.0.0)
   coffee-rails (~> 3.2.1)
   jquery-rails
   koala

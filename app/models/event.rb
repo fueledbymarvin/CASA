@@ -14,7 +14,7 @@ class Event < ActiveRecord::Base
 	validates_presence_of :day, :starttime, :location, :unless => :hassub
 	validates_presence_of :endtime, :if => :addend
 	validates_presence_of :subtitle, :if => :hassub
-	validates :title, :length => { :maximum => 25 }
+	validates :title, :length => { :maximum => 50 }
 	after_initialize :init
 
 	def init

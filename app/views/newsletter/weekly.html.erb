@@ -22,7 +22,7 @@
                     <tbody><tr>
                         <td colspan="2" style="border-bottom:1px solid #ded3b7">
                             <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;font-weight:bold;font-size:20px;padding-left:20px;">Hello friend!</p>
-                            <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;padding:0px 40px;font-size:14px;"><%= @message.html_safe %></p>
+                            <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;padding:0px 40px;font-size:14px;"><%= BlueCloth.new(@message).to_html().html_safe %></p>
                             <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;padding-left:60px;font-size:14px;">Best regards,</p>
                             <p style="font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;font-weight:bold;font-size:20px;padding-left:80px;"><span class="il">CASA</span> Board</p>
                         </td>
@@ -61,7 +61,7 @@
 
                         <tr>
                             <td colspan="2" style="border-bottom:1px solid #ded3b7;font-family:'Tw Cen MT','Century Gothic',sans-serif;color:#332c29;font-size:14px;">
-                                <%= event.info.html_safe %>
+                                <%= BlueCloth.new(event.info).to_html().html_safe %>
                                 <br /><br />
                             </td>
                         </tr>
