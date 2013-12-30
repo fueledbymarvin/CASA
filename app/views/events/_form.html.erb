@@ -58,7 +58,7 @@
   <br />
   <div class="field">
     <%= f.label :info %>
-    <%= f.text_area :info %>
+    <%= f.text_area :info, "data-provide" => "markdown" %>
   </div>
   <br />
   <% unless @event.new_record? || !@event.photo? %>

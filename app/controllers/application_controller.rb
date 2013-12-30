@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   	end
 
     # reconnect with facebook if token is expired
-    if current_member && current_member.oauth_expires_at < DateTime.now
+    if current_member && !current_member.oauth_expires_at.nil? && current_member.oauth_expires_at < DateTime.now
       session[:source] = request.path
       reset_session
       flash[:error] = "Please sign in again."
