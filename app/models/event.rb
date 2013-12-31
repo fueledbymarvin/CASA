@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
 	include ActionView::Helpers
 	require 'open-uri'
 
-	has_attached_file :photo, :styles => { :newsletter => "400>", :display => Proc.new { |a| a.dimensions } }
+	has_attached_file :photo, :styles => { :newsletter => "500>", :display => Proc.new { |a| a.dimensions } }
 	before_save :destroy_photo?
 
 	validates_attachment_size :photo, :less_than => 2.megabytes

@@ -82,8 +82,8 @@ Casa::Application.configure do
     domain: "yalecasa.herokuapp.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "yale.casa",
-    password: "casarocks"
+    user_name: ENV['gmail_user'],
+    password: ENV['gmail_pass']
   }
-  
+
 end

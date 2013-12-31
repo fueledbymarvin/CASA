@@ -1,0 +1,98 @@
+#email {
+  background-color: #332c29;
+  font-family: 'Tw Cen MT','Century Gothic',sans-serif;
+  color: #332c29;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 10px 0 50px;
+  a {
+    color: #cd8c86;
+    text-decoration: none;
+  }
+  #header {
+    margin: 0 auto -40px;
+    width: 750px;
+  }
+  #content {
+    margin: 0 auto;
+    width: 600px;
+    background-color: #f7eedd;
+  }
+  #greeting {
+    padding: 10px 0;
+    margin: 0 30px 20px;
+    .grt, .sig {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .sal, .sig {
+      padding: 0 20px;
+    }
+    .msg p {
+      padding: 0 20px;
+    }
+    .sig {
+      margin-left: 20px;
+    }
+  }
+  .event {
+    padding: 10px 0;
+    margin: 0 30px;
+    img {
+      border:5px solid #332c29;
+      border-radius:5px;
+    }
+    .lantern, .titles {
+      display: inline-block;
+    }
+    .lantern {
+      background-image: url('http://i.imgur.com/Rh5Au.png');
+      height: 80px;
+      width: 80px;
+      text-align: center;
+      color: #cd8c86;
+      font-size: 12px;
+      font-weight: bold;
+      p {
+        padding-top: 16px;
+        line-height: 14px;
+      }
+    }
+    .titles {
+      margin-left: 5px;
+      vertical-align: top;
+      margin-top: 15px;
+      p {
+        margin: 5px 0;
+      }
+      .title {
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .sub {
+        font-size: 14px;
+      }
+    }
+    .info {
+      font-size: 14px;
+    }
+    .text {
+      margin-top: -8px;
+    }
+    .bottom {
+      font-size: 12px;
+    }
+  }
+  #footer {
+    padding: 20px 0 30px;
+    margin: 0 30px 0;
+    font-size: 12px;
+    text-align: center;
+    p {
+      margin: 0;
+    }
+  }
+  #greeting, .event {
+    border-bottom: 1px solid #ded3b7;
+  }
+}

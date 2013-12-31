@@ -45,6 +45,8 @@ gem 'sprockets', '~> 2.1.2'
 
 gem 'bluecloth', '>= 2.0.0'
 
+gem 'roadie'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
