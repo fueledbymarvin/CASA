@@ -109,8 +109,8 @@ class Event < ActiveRecord::Base
 
 	def self.news(date)
 		events = []
-		self.find(:all, :conditions => ["newsuntil >= ?", date]).map { |event| event.priority }.uniq.sort.reverse.each do |pr|
-			events = events + self.where(priority: pr).sort_by { |event| event.newsuntil }
+		self.find(:all, :conditions => ["newsuntil >= ?", date]).map { |event| event.priority }.uniq.sort.reverse.each do |pr| # iterate through all possible priorities
+			events = events + self.find(:all, :conditions => ["newsuntil >= ? AND priority = ?", date, pr]).sort_by { |event| event.newsuntil }
 		end
 		events
 	end
