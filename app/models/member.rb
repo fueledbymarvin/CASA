@@ -63,7 +63,7 @@ class Member < ActiveRecord::Base
 	def self.pres_first
 		members = self.where(position: "Co-President")
 		Member.all.each do |member|
-			if member.position != "Co-President" && member.fbid != 594889925
+			if member.position != "Co-President" && member.fbid != "594889925"
 				members << member
 			end
 		end
